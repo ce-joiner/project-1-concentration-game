@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&family=Teko:wght@300..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Maven Pro', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background-color: lightsalmon;
+}
+
+.concentration {
+    height: 700px;
+    width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    perspective: 1000px;
+}
+
+.card {
+    height: calc(25% - 10px);
+    width: calc(25% - 10px);
+    position: relative;
+    margin: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+.front-face {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+    background-color:blanchedalmond;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+.back-face {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+    background-color:blanchedalmond;
+    backface-visibility: hidden;
+}
+
+.card:active {
+    transform: scale(.96);
+    transition: transform .3s;
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+}
