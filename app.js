@@ -109,13 +109,16 @@ function reduceGuesses() {
     updateGuessesDisplay();
     if (guessesRemaining <= 0) {
         clearInterval(timerInterval);
-        // gameOver();
+        gameOver();
     }
 }
 
-// function gameOver() {
-
-// }
+function gameOver() {
+    if (timeRemaining <= 0 || guessesRemaining <= 0) {
+        clearInterval(timerInterval); 
+        showPopup("You lost! Good thing you have 9 lives!");
+    }
+}
 
 document.getElementById("reset").addEventListener("click", () => {
     clearInterval(timerInterval);
@@ -139,3 +142,32 @@ document.getElementById("play").addEventListener("click", () => {
     startTimer();
     updateGuessesDisplay();
 })
+
+function showPopup(message) {
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("popup-message");
+
+    popupMessage.textContent = message;
+    popup.style.display = "flex"; // Show the popup
+
+    // Reset game when button is clicked
+    document.getElementById("popup-button").addEventListener("click", () => {
+        popup.style.display = "none"; // Hide the popup
+        resetDeck(); // Reset the game
+    });
+}
+
+function checkWinCondition() {
+    const matchedCards = document.querySelectorAll(".card.flip");
+    if (matchedCards.length === cards.length) {
+        clearInterval(timerInterval); // Stop the timer
+        showPopup("Purrrrfect, you win!");
+    }
+}
+
+function gameOver() {
+    if (timeRemaining <= 0 || guessesRemaining <= 0) {
+        clearInterval(timerInterval); 
+        showPopup("You lost! Good thing you have 9 lives!");
+    }
+}
