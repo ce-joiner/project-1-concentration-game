@@ -34,9 +34,14 @@ function flipCard() {
 function checkForMatch() {
     if (firstCard.dataset.key === secondCard.dataset.key) {
         disableCards();
+        checkWinCondition();
     } else {
         reduceGuesses();
-        unflipCards();
+        if (guessesRemaining <= 0) {
+            gameOver()
+        } else {
+            unflipCards();
+        }
     }
 }
 
@@ -74,21 +79,11 @@ shuffle();
 cards.forEach(card => card.addEventListener("click", flipCard));
 
 function startTimer() {
-    if (timerInterval) return;
-    // clear any existing number 
-    if (timerInterval) {
-        clearInterval(timerInterval);
-    }
-    // reset to 60 seconds 
-    timeRemaining = 60;
-    updateTimerDisplay();
-    // start counting down 
+    if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
         timeRemaining--;
         updateTimerDisplay();
-        // stop time when it reaches 0
         if (timeRemaining <= 0) {
-            clearInterval(timerInterval);
             gameOver();
         }
     }, 1000);
@@ -108,33 +103,21 @@ function reduceGuesses() {
     guessesRemaining--;
     updateGuessesDisplay();
     if (guessesRemaining <= 0) {
-        clearInterval(timerInterval);
         gameOver();
     }
 }
 
 function gameOver() {
-    if (timeRemaining <= 0 || guessesRemaining <= 0) {
-        clearInterval(timerInterval); 
-        showPopup("You lost! Good thing you have 9 lives!");
-    }
+    const matchedCards = document.querySelectorAll(".card.flip");
+    // check to see if player won first to avoid giving a loss message 
+    if (matchedCards.length === cards.length) return;
+    clearInterval(timerInterval);
+    showPopup("You lost! Good thing you have 9 lives!");
 }
 
-document.getElementById("reset").addEventListener("click", () => {
-    clearInterval(timerInterval);
-    gameIsActive = false;
-    timeRemaining = 60;
-    guessesRemaining = 25;
-    updateTimerDisplay();
-    updateGuessesDisplay();
-    // reset the flipped cards 
-    cards.forEach(card => {
-        card.classList.remove("flip");
-        card.addEventListener("click", flipCard);
-    });
-    // and shuffle them 
-    shuffle();
-});
+
+document.getElementById("reset").addEventListener("click", resetGame);
+
 
 document.getElementById("play").addEventListener("click", () => {
     console.log("Play button clicked!");
@@ -151,10 +134,26 @@ function showPopup(message) {
     popup.style.display = "flex"; // Show the popup
 
     // Reset game when button is clicked
-    document.getElementById("popup-button").addEventListener("click", () => {
-        popup.style.display = "none"; // Hide the popup
-        resetDeck(); // Reset the game
+    const popupButton = document.getElementById("popup-button");
+    popupButton.addEventListener("click", () => {
+        popup.style.display = "none";
+        resetGame(); /*fully reset everything*/
+    }, { once: true}); /* make sure it is only added once */
+}
+    
+function resetGame() {
+    clearInterval(timerInterval);
+    gameIsActive = false;
+    timeRemaining = 60;
+    guessesRemaining = 25
+    updateTimerDisplay();
+    updateGuessesDisplay();
+    cards.forEach(card => {
+        card.classList.remove("flip");
+        card.addEventListener("click", flipCard);
     });
+    shuffle();
+    resetDeck();
 }
 
 function checkWinCondition() {
@@ -162,12 +161,9 @@ function checkWinCondition() {
     if (matchedCards.length === cards.length) {
         clearInterval(timerInterval); // Stop the timer
         showPopup("Purrrrfect, you win!");
+        lockDeck = true;
     }
 }
 
-function gameOver() {
-    if (timeRemaining <= 0 || guessesRemaining <= 0) {
-        clearInterval(timerInterval); 
-        showPopup("You lost! Good thing you have 9 lives!");
-    }
-}
+
+
