@@ -49,7 +49,7 @@ Match all 8 pairs of kitties! This game is a cat-themed memory matching game, th
 
 
 ## <a name="deployment"></a>Deployed Link
-([https://wonderful-brahmagupta-6a75d3.netlify.com](https://connect4pc.netlify.app/))
+[Kitty Concentration](https://ce-joiner.github.io/project-1-concentration-game/)
 
 * You can view the repository:
 [Github.com](https://github.com/ce-joiner/project-1-concentration-game)

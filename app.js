@@ -63,10 +63,10 @@ function resetDeck() {
     [firstCard, secondCard] = [null, null];
 }
 
-function shuffle() {
+function shuffle() { 
     cards.forEach(card => {
-        let randomPosition = Math.floor(Math.random() * 16);
-        card.style.order = randomPosition;
+        let randomPosition = Math.floor(Math.random() * 16); /* generate random number between 0-1, * 16 cards, round down to nearest whole */
+        card.style.order = randomPosition; /* allow dynamic rearrangement in flex layout using CSS*/
     });
 }
 
