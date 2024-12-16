@@ -2,10 +2,8 @@
 
 # Kitty Concentration
 
-![wireframe image](https://trello.com/1/cards/67578c762964004ad5755890/attachments/67579c33efd60c4f5c5dff47/download/IMG_2419.jpeg)
+<img src="images/Screenshot 2024-12-15 at 6.59.42 PM.png" alt="Screenshot of game"/>
 
-
-![Three kitty faces](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExajFpczF0eW5wcDMwZWUyYWY4Nm9mNjNsbmZtcTAxMnFhbnZrc21odCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YRtLgsajXrz1FNJ6oy/giphy.webp)
 
 ## Description
 Match all 8 pairs of kitties! This game is a cat-themed memory matching game, the player flips over pairs of cards in search of matching pairs, while racing against the clock and managing limited guesses.
@@ -37,8 +35,7 @@ Match all 8 pairs of kitties! This game is a cat-themed memory matching game, th
 
 
 ## Wireframe Images
-* I drew my original wireframe by hand, but the design changed during development.<img src="https://trello.com/1/cards/67578c762964004ad5755890/attachments/67579c33efd60c4f5c5dff47/previews/67579c39efd60c4f5c5e0c19/download/IMG_2419.webp">
-
+* I drew my original wireframe by hand, but the design changed during development.<img src="images/wirefreame.png" alt="wireframe image"/>
 ## Trello Planning
 * Link to trello planning board -  https://trello.com/b/md5ovfYv/project-1-concentration
 
