@@ -4,9 +4,9 @@ const guessesDisplay = document.getElementById("guesses");
 const playButton = document.getElementById("play");
 const resetButton = document.getElementById("reset");
 
-let hasFlippedCard = false;
+let hasFlippedCard = false; /* treats first click a first card of a pair */
 let firstCard, secondCard;
-let lockDeck = false;
+let lockDeck = false; /* lets player click cards right away when game starts */
 let timeRemaining = 60;
 let guessesRemaining = 25;
 let timerInterval;
@@ -14,25 +14,22 @@ let gameIsActive = false;
 
 
 function flipCard() {
-    if (!gameIsActive) return;
+    if (!gameIsActive) return; /* exit function if game has not started */
     if (lockDeck) return;
-    if (this === firstCard) return;
-    this.classList.add("flip");
+    if (this === firstCard) return; /* so you can't click same card twice */
+    this.classList.add("flip"); /* add flip class to card clicked, trigger css to flip card */
 
-    if (!hasFlippedCard) {
+    if (!hasFlippedCard) { /* check to see if this is the first card flipped over */
         hasFlippedCard = true;
         firstCard = this;
         return;
     }
-
-    secondCard = this;
-    // hasFlippedCard = false;
-
+    secondCard = this; /* if one card already flipped, currently clicked card is "second card" */
     checkForMatch();
 }
 
 function checkForMatch() {
-    if (firstCard.dataset.key === secondCard.dataset.key) {
+    if (firstCard.dataset.key === secondCard.dataset.key) { /* used keys vs id's for pairs of cards */
         disableCards();
         checkWinCondition();
     } else {
@@ -57,9 +54,8 @@ function unflipCards() {
     setTimeout(() => {
         firstCard.classList.remove("flip");
         secondCard.classList.remove("flip");
-        // lockDeck = false;
         resetDeck();
-    }, 2000);
+    }, 1700);
 }
 
 function resetDeck() {
@@ -75,8 +71,6 @@ function shuffle() {
 }
 
 shuffle();
-
-cards.forEach(card => card.addEventListener("click", flipCard));
 
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
@@ -116,8 +110,9 @@ function gameOver() {
 }
 
 
-document.getElementById("reset").addEventListener("click", resetGame);
+cards.forEach(card => card.addEventListener("click", flipCard));
 
+document.getElementById("reset").addEventListener("click", resetGame);
 
 document.getElementById("play").addEventListener("click", () => {
     console.log("Play button clicked!");
@@ -138,9 +133,9 @@ function showPopup(message) {
     popupButton.addEventListener("click", () => {
         popup.style.display = "none";
         resetGame(); /*fully reset everything*/
-    }, { once: true}); /* make sure it is only added once */
+    }, { once: true }); /* make sure it is only added once */
 }
-    
+
 function resetGame() {
     clearInterval(timerInterval);
     gameIsActive = false;

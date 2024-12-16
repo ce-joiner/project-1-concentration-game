@@ -19,7 +19,7 @@ h1 {
 }
 
 body {
-    height: 100vh;
+    height: 100vh; /*fill entire height of window's visible area*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,6 @@ body {
     position: relative;
 }
 
-
 .concentration {
     height: 700px;
     width: 700px;
@@ -36,17 +35,17 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     margin: auto;
-    perspective: 1000px;
+    perspective: 1000px; /*distance from viewer, gives subtle 3D effect*/
 }
 
 .card {
-    height: calc(25% - 10px);
+    height: calc(25% - 10px); /* responsive sizing!*/
     width: calc(25% - 10px);
-    position: relative;
+    position: relative; /* position images relative to card's boundaries */
     margin: 5px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
     transform: scale(1);
-    transform-style: preserve-3d;
+    transform-style: preserve-3d; /* makes card flipping 3D*/
     transition: transform .5s;
     cursor: pointer;
 }
@@ -71,11 +70,11 @@ body {
 }
 
 .card:active {
-    transform: scale(.96);
+    transform: scale(.96); /* slightly smaller when clicked */
     transition: transform .3s;
 }
 
-.card.flip {
+.card.flip { /* add flip class dynamically with js */
     transform: rotateY(180deg);
 }
 
@@ -136,7 +135,7 @@ main {
     padding: 10px; 
     border-radius: 15px; 
     text-align: center; 
-    width: 120px; /* Match width with timer for consistency */
+    width: 120px; 
 }
 
 .guesses .label {
@@ -188,4 +187,33 @@ main {
 
 .popup-button:hover {
     background-color:tomato;
+}
+
+.instructions {
+    position: absolute; /* Position it relative to the screen */
+    right: 5%; /* Distance from the right edge of the parent container */
+    top: 50%; /* Vertically center */
+    transform: translateY(-50%); 
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 20px;
+    width: 190px; /* Adjust width for better readability */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Maven Pro', sans-serif;
+    text-align: left; /* Align text to the left for readability */
+}
+
+.instructions h2 {
+    font-size: 1.5rem;
+    color: #f04223;
+    margin-bottom: 10px;
+}
+.instructions ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    font-size: 1rem;
+}
+.instructions li {
+    margin-bottom: 10px;
+    line-height: 1;
 }
